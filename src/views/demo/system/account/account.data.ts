@@ -1,5 +1,5 @@
-import { getAllRoleList, isAccountExist } from '/@/api/demo/system';
-import { BasicColumn, FormSchema } from '/@/components/Table';
+import { getAllRoleList, isAccountExist } from '@/api/demo/system';
+import { BasicColumn, FormSchema } from '@/components/Table';
 
 /**
  * transform mock data
@@ -10,7 +10,7 @@ import { BasicColumn, FormSchema } from '/@/components/Table';
  *  ...
  * }
  */
-const deptMap = (() => {
+export const deptMap = (() => {
   const pDept = ['华东分部', '华南分部', '西北分部'];
   const cDept = ['研发部', '市场部', '商务部', '财务部'];
 
@@ -128,7 +128,6 @@ export const accountFormSchema: FormSchema[] = [
     componentProps: {
       fieldNames: {
         label: 'deptName',
-        key: 'id',
         value: 'id',
       },
       getPopupContainer: () => document.body,

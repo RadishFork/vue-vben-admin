@@ -1,21 +1,21 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-import { useAppStore } from '/@/store/modules/app';
-import { usePermissionStore } from '/@/store/modules/permission';
-import { useUserStore } from '/@/store/modules/user';
+import { useAppStore } from '@/store/modules/app';
+import { usePermissionStore } from '@/store/modules/permission';
+import { useUserStore } from '@/store/modules/user';
 
 import { useTabs } from './useTabs';
 
-import { router, resetRouter } from '/@/router';
-// import { RootRoute } from '/@/router/routes';
+import { router, resetRouter } from '@/router';
+// import { RootRoute } from '@/router/routes';
 
-import projectSetting from '/@/settings/projectSetting';
-import { PermissionModeEnum } from '/@/enums/appEnum';
-import { RoleEnum } from '/@/enums/roleEnum';
+import projectSetting from '@/settings/projectSetting';
+import { PermissionModeEnum } from '@/enums/appEnum';
+import { RoleEnum } from '@/enums/roleEnum';
 
 import { intersection } from 'lodash-es';
-import { isArray } from '/@/utils/is';
-import { useMultipleTabStore } from '/@/store/modules/multipleTab';
+import { isArray } from '@/utils/is';
+import { useMultipleTabStore } from '@/store/modules/multipleTab';
 
 // User permissions related operations
 export function usePermission() {
@@ -46,10 +46,13 @@ export function usePermission() {
     const tabStore = useMultipleTabStore();
     tabStore.clearCacheTabs();
     resetRouter();
+
+    // 动态加载路由（再次）
     const routes = await permissionStore.buildRoutesAction();
     routes.forEach((route) => {
       router.addRoute(route as unknown as RouteRecordRaw);
     });
+
     permissionStore.setLastBuildMenuTime();
     closeAll();
   }
